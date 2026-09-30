@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Арт бот</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: sans-serif;
+      background: #fce4ec;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+    }
+    .screen { display: none; width: 100%; max-width: 600px; position: relative; }
+    .screen.active { display: block; }
+    .screen img { width: 100%; display: block; border-radius: 12px; }
+    .click-zone { position: absolute; cursor: pointer; }
+
+    /* Картинка 1 — меню (оставляем как есть, всё работает) */
+    .btn-artikuly { top: 31%; left: 5%; width: 45%; height: 10%; }
+    .btn-chat     { top: 47%; left: 5%; width: 45%; height: 10%; }
+    .btn-kanal    { top: 60%; left: 5%; width: 45%; height: 10%; }
+
+    /* Картинка 2 — магазины (сдвинули вниз) */
+    .btn-ym   { top: 33%; left: 5%; width: 45%; height: 10%; }
+    .btn-wb   { top: 46%; left: 5%; width: 45%; height: 10%; }
+    .btn-ozon { top: 58%; left: 5%; width: 45%; height: 10%; }
+
+    /* Кнопка «назад» — верхний левый угол */
+    .btn-back { top: 5%; left: 5%; width: 15%; height: 8%; }
+  </style>
+</head>
+<body>
+
+  <div class="screen active" id="screen1">
+    <img src="menu.jpg" alt="Меню">
+    <div class="click-zone btn-artikuly" onclick="showScreen('screen2')"></div>
+    <div class="click-zone btn-chat" onclick="openLink('https://t.me/+fMLwijLM-t0zZWVi')"></div>
+    <div class="click-zone btn-kanal" onclick="openLink('https://t.me/aallaasskkaammaia')"></div>
+  </div>
+
+  <div class="screen" id="screen2">
+    <img src="artikuly.jpg" alt="Артикулы">
+    <div class="click-zone btn-back" onclick="showScreen('screen1')"></div>
+    <div class="click-zone btn-ym" onclick="openLink('https://market.yandex.ru/cc/BCBVbJ')"></div>
+    <div class="click-zone btn-wb" onclick="openLink('https://www.wildberries.ru/catalog/1520586983/detail.aspx?size=2321237179')"></div>
+    <div class="click-zone btn-ozon" onclick="openLink('https://ozon.ru/t/GALlxa8')"></div>
+  </div>
+
+  <script>
+    Telegram.WebApp.ready();
+    Telegram.WebApp.expand();
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+    function openLink(url) {
+      Telegram.WebApp.openLink(url);
+    }
+  </script>
+
+</body>
+</html>
